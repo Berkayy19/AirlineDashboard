@@ -80,11 +80,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\berka\\Desktop\\aa\\AirlineDashboard\\FlightBackend\\FlightBackend.csproj",
+      "projectUniqueName": "C:\\Users\\berka\\Desktop\\aaaaa\\AirlineDashboard\\FlightBackend\\FlightBackend.csproj",
       "projectName": "FlightBackend",
-      "projectPath": "C:\\Users\\berka\\Desktop\\aa\\AirlineDashboard\\FlightBackend\\FlightBackend.csproj",
+      "projectPath": "C:\\Users\\berka\\Desktop\\aaaaa\\AirlineDashboard\\FlightBackend\\FlightBackend.csproj",
       "packagesPath": "C:\\Users\\berka\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\berka\\Desktop\\aa\\AirlineDashboard\\FlightBackend\\obj\\",
+      "outputPath": "C:\\Users\\berka\\Desktop\\aaaaa\\AirlineDashboard\\FlightBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\berka\\AppData\\Roaming\\NuGet\\NuGet.Config"
