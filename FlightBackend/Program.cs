@@ -1,11 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS aktivieren
+// CORS fuer Angular Dev erlauben
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularDev", policy =>
+    options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular Dev-Server
+        policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -17,9 +17,8 @@ builder.Services.AddScoped<FlightBackend.Services.LufthansaService>();
 
 var app = builder.Build();
 
-// Reihenfolge ist wichtig
 app.UseHttpsRedirection();
-app.UseCors("AllowAngularDev");
+app.UseCors(); // wichtig: vor Authorization
 app.UseAuthorization();
 
 app.MapControllers();

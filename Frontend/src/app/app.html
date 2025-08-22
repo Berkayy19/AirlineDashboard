@@ -32,7 +32,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let r of rows()">
+  <tr *ngFor="let r of rows()" (click)="loadDetails(r.flight)" style="cursor: pointer">
     <td>{{ r.flight }}</td>
     <td>{{ r.dep }}</td>
     <td>{{ r.arr }}</td>
@@ -40,5 +40,56 @@
   </tr>
   </tbody>
 </table>
+
+<div *ngIf="loadingDetails()">laedt Details…</div>
+
+<!-- Detailkarte: selectedFlight ist jetzt ein einzelnes Flight-Objekt -->
+<div *ngIf="selectedFlight" class="card">
+  <h3>
+    Details zu
+    {{ selectedFlight?.MarketingCarrier?.AirlineID }}
+    {{ selectedFlight?.MarketingCarrier?.FlightNumber }}
+    <span *ngIf="selectedFlight?.OperatingCarrier?.AirlineID">
+      (operated by {{ selectedFlight?.OperatingCarrier?.AirlineID }}
+      {{ selectedFlight?.OperatingCarrier?.FlightNumber }})
+    </span>
+  </h3>
+
+  <p>Status: {{ selectedFlight?.FlightStatus?.Definition ?? 'NA' }}</p>
+  <p>Maschine: {{ selectedFlight?.Equipment?.AircraftCode ?? 'unbekannt' }}</p>
+
+  <h4>Abflug</h4>
+  <p>
+    {{ selectedFlight?.Departure?.AirportCode }}
+    &middot;
+    geplanter Start: {{ selectedFlight?.Departure?.ScheduledTimeLocal?.DateTime }}
+    <span *ngIf="selectedFlight?.Departure?.ActualTimeLocal?.DateTime">
+      &middot; effektiv: {{ selectedFlight?.Departure?.ActualTimeLocal?.DateTime }}
+    </span>
+    <span *ngIf="selectedFlight?.Departure?.Terminal?.Gate">
+      &middot; Gate: {{ selectedFlight?.Departure?.Terminal?.Gate }}
+    </span>
+  </p>
+
+  <h4>Ankunft</h4>
+  <p>
+    {{ selectedFlight?.Arrival?.AirportCode }}
+    <span *ngIf="selectedFlight?.Arrival?.Terminal?.Name">
+      &middot; Terminal: {{ selectedFlight?.Arrival?.Terminal?.Name }}
+    </span>
+    &middot;
+    geplant: {{ selectedFlight?.Arrival?.ScheduledTimeLocal?.DateTime }}
+    <span *ngIf="selectedFlight?.Arrival?.ActualTimeLocal?.DateTime">
+      &middot; effektiv: {{ selectedFlight?.Arrival?.ActualTimeLocal?.DateTime }}
+    </span>
+    <span *ngIf="selectedFlight?.Arrival?.Terminal?.Gate">
+      &middot; Gate: {{ selectedFlight?.Arrival?.Terminal?.Gate }}
+    </span>
+  </p>
+
+  <pre style="white-space: pre-wrap; background: #f5f5f5; padding: 8px; border-radius: 8px;">
+{{ selectedFlight | json }}
+  </pre>
+</div>
 
 <pre *ngIf="raw() && !rows().length">{{ raw() | json }}</pre>

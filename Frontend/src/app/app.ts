@@ -15,7 +15,7 @@ type Row = { flight: string; dep: string; arr: string; op: string };
 export class AppComponent {
   private http = inject(HttpClient);
 
-  // Backend Basis URL anpassen
+  // Bei Proxy: '/api', sonst 'http://localhost:5286/api'
   apiBase = 'http://localhost:5286/api';
 
   from = 'ZRH';
@@ -27,10 +27,15 @@ export class AppComponent {
   rows = signal<Row[]>([]);
   raw = signal<any>(null);
 
+  // Details
+  selectedFlight: any = null; // einzelnes Flight-Objekt
+  loadingDetails = signal(false);
+
   search(): void {
     this.error.set(null);
     this.rows.set([]);
     this.raw.set(null);
+    this.selectedFlight = null;
 
     if (this.from.length !== 3 || this.to.length !== 3 || !this.date) {
       this.error.set('Bitte gueltige Felder ausfuellen');
@@ -44,15 +49,14 @@ export class AppComponent {
       .set('to', this.to.toUpperCase())
       .set('date', this.date);
 
-    this.http.get(`${this.apiBase}/flights`, { params, responseType: 'text' }).subscribe({
-      next: txt => {
-        // Backend liefert String weiter
-        const payload = tryParseJson(txt);
+    // Backend antwortet JSON -> direkt als Objekt holen
+    this.http.get<any>(`${this.apiBase}/flights`, { params }).subscribe({
+      next: payload => {
         this.raw.set(payload);
 
+        const schedules = ensureArray(payload?.ScheduleResource?.Schedule);
         const out: Row[] = [];
-        const items = payload?.ScheduleResource?.Schedule ?? [];
-        for (const it of items) {
+        for (const it of schedules) {
           const f = it?.Flight ?? {};
           const flight = `${f?.MarketingCarrier?.AirlineID ?? ''}${f?.MarketingCarrier?.FlightNumber ?? ''}`;
           const dep = `${f?.Departure?.AirportCode ?? ''} ${f?.Departure?.ScheduledTimeLocal?.DateTime ?? ''}`;
@@ -69,8 +73,30 @@ export class AppComponent {
       }
     });
   }
+
+  loadDetails(flightCode: string) {
+    this.loadingDetails.set(true);
+    const params = new HttpParams()
+      .set('flight', flightCode)
+      .set('date', this.date);
+
+    this.http.get<any>(`${this.apiBase}/flights/by-number`, { params })
+      .subscribe({
+        next: payload => {
+          // FlightStatusResource -> Flights -> Flight kann Array oder Objekt sein
+          const flights = payload?.FlightStatusResource?.Flights?.Flight;
+          this.selectedFlight = Array.isArray(flights) ? flights[0] : flights ?? null;
+          this.loadingDetails.set(false);
+        },
+        error: err => {
+          this.error.set(err?.error?.message ?? 'Fehler beim Laden der Fluginfos');
+          this.loadingDetails.set(false);
+        }
+      });
+  }
 }
 
-function tryParseJson(t: string) {
-  try { return JSON.parse(t); } catch { return t; }
+function ensureArray<T>(x: T | T[] | undefined | null): T[] {
+  if (!x) return [];
+  return Array.isArray(x) ? x : [x];
 }
