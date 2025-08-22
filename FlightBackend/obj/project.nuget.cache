@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tSh6unO8zII=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\berka\\Desktop\\Lufthansa\\AirlineDashboard\\FlightBackend\\FlightBackend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\berka\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\berka\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
