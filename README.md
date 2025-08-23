@@ -1,6 +1,7 @@
 # ✈️ What It Does
 
 Airline Dashboard is a full-stack application that connects to the **Lufthansa Open API** and provides flight search by searching with the departure and destination Airport and date. You can also see details about specific flights
+![Demo](Preview.gif) 
 
 ---
 
