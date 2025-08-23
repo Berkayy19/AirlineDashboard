@@ -10,7 +10,9 @@ Make sure you have these tools installed:
 - [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download)  
 - [Node.js (LTS)](https://nodejs.org/en/download/) + npm  
 - [Angular CLI](https://angular.dev/cli)  
-  npm install -g @angular/cli  
+  ```bash
+  npm install -g @angular/cli
+  ```
 - Git  
 
 ---
@@ -18,39 +20,49 @@ Make sure you have these tools installed:
 ## 🔧 Setup Instructions
 
 ### 1. Clone the Repository
-git clone https://github.com/Berkayy19/AirlineDashboard.git  
-cd AirlineDashboard  
+```bash
+git clone https://github.com/Berkayy19/AirlineDashboard.git
+cd AirlineDashboard
+```
 
 ### 2. Configure Lufthansa API Credentials
 1. Register at the Lufthansa Developer Portal: https://developer.lufthansa.com  
 2. Create an app and get your Client ID and Client Secret.  
-3. Open FlightBackend/appsettings.json and add your credentials:
+3. Open `FlightBackend/appsettings.json` and add your credentials:
 
+```json
 {
   "Lufthansa": {
     "ClientId": "YOUR_CLIENT_ID_HERE",
     "ClientSecret": "YOUR_CLIENT_SECRET_HERE"
   }
 }
+```
 
 ⚠️ Do not commit real credentials to GitHub.
 
 ---
 
 ### 3. Run the Backend
-cd FlightBackend  
-dotnet run  
+```bash
+cd FlightBackend
+dotnet run
+```
 
-Backend runs on: https://localhost:5286 (check launchSettings.json for the port)
+Backend runs on:  
+👉 https://localhost:5286 (check `launchSettings.json` for the port)
 
 ---
 
 ### 4. Run the Frontend
-cd Frontend  
-npm install  
-ng serve  
+```bash
+cd Frontend
+npm install
+ng serve
+```
 
-Frontend runs on: http://localhost:4200  
+Frontend runs on:  
+👉 http://localhost:4200  
 
 ---
 
