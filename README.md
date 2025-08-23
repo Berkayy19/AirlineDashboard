@@ -1,3 +1,30 @@
+# ✈️ What It Does
+
+Airline Dashboard is a full-stack application that connects to the **Lufthansa Open API** and provides flight search by searching with the departure and destination Airport and date. You can also see details about specific flights
+
+---
+
+## 🖥️ Backend (ASP.NET Core Web API)
+- Authenticates with Lufthansa via **OAuth2 (client_credentials)**  
+
+---
+
+## 🌐 Frontend (Angular)
+- Simple search form for **origin, destination, and date**  
+- Displays flights in a table with times and flight numbers  
+- Clicking a flight shows details:
+  - ✅ Current status (On Time, Delayed, Landed, Cancelled)  
+  - 🛫 Departure info (airport, gate, actual/scheduled times)  
+  - 🛬 Arrival info (airport, terminal, gate, actual/scheduled times)  
+  - ✈️ Aircraft type and operating carrier  
+
+---
+
+## 📊 Summary
+- Search for flights  
+- See a list of results   
+
+
 # 🚀 Setup Guide for Airline Dashboard
 
 Follow these steps to get the project running on your machine:
