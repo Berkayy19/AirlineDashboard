@@ -67,8 +67,6 @@ cd AirlineDashboard
 }
 ```
 
-⚠️ Do not commit real credentials to GitHub.
-
 ---
 
 ### 3. Run the Backend
@@ -76,9 +74,6 @@ cd AirlineDashboard
 cd FlightBackend
 dotnet run
 ```
-
-Backend runs on:  
-👉 https://localhost:5286 (check `launchSettings.json` for the port)
 
 ---
 
@@ -88,9 +83,6 @@ cd Frontend
 npm install
 ng serve
 ```
-
-Frontend runs on:  
-👉 http://localhost:4200  
 
 ---
 
